@@ -1,0 +1,8 @@
+<div authOnly>
+    <h2>Dashboard</h2>
+        <div>
+            <p>Welcome, {{ username }}!</p>
+            <p>Login time: {{ loginTimestamp | formatDate }}</p>
+            <button ng-click="logout()">Logout</button>
+        </div>
+</div>
