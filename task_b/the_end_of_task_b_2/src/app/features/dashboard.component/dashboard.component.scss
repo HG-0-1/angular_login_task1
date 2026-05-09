@@ -1,0 +1,76 @@
+/*
+  Supervisor note #5: Angular scopes these styles via _ngcontent-xxx
+  attributes visible in DevTools — no ancestor selectors needed.
+  Every selector here matches exactly what appears in the template.
+*/
+
+.dashboard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 1rem;
+  background-color: #f7fafc;
+
+  &__card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 2.5rem;
+    width: 100%;
+    max-width: 480px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  }
+
+  &__greeting {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1a202c;
+    margin: 0 0 0.5rem;
+  }
+
+  &__timestamp {
+    font-size: 0.875rem;
+    color: #718096;
+    margin: 0 0 1.5rem;
+  }
+
+  // Supervisor note #13: only rendered when a logout error exists
+  &__error {
+    font-size: 0.875rem;
+    color: #c53030;
+    background: #fff5f5;
+    border: 1px solid #fed7d7;
+    border-radius: 6px;
+    padding: 0.625rem 0.875rem;
+    margin-bottom: 1rem;
+  }
+
+  &__logout-btn {
+    width: 100%;
+    padding: 0.625rem 1rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #ffffff;
+    background: #3182ce;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.15s ease, opacity 0.15s ease;
+
+    &:hover:not(:disabled) {
+      background: #2b6cb0;
+    }
+
+    // Supervisor note #12: visual feedback that the button is locked
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
+
+  &__loading {
+    color: #718096;
+    font-size: 0.875rem;
+  }
+}

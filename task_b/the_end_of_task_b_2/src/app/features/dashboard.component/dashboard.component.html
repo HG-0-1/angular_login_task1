@@ -1,0 +1,46 @@
+<!--
+  Mirrors Task A's dashboard.html:
+    - "Welcome, {{ username }}!"          → Synchronous getter
+    - "Login time: {{ x | formatDate }}"  → loginTimestamp piped through formatDate
+    - Logout button                       → (click)="logout()"
+
+  authOnly on the card restricts visibility to authenticated users.
+
+  Error paragraph uses @if — absent from the DOM entirely when no error.
+  Button disabled while isLoggingOut() is true.
+-->
+
+<div class="dashboard">
+    @if (isAuthenticated) {
+
+    <div class="dashboard__card" authOnly>
+
+        <h2 class="dashboard__greeting">
+            Welcome, {{ username }}!
+        </h2>
+
+        @if (loginTimestamp) {
+        <p class="dashboard__timestamp">
+            Login time: {{ loginTimestamp | formatDate }}
+        </p>
+        }
+
+        @if (logoutError()) {
+        <p class="dashboard__error" role="alert">
+            {{ logoutError() }}
+        </p>
+        }
+
+        <button
+            class="dashboard__logout-btn"
+            [disabled]="isLoggingOut()"
+            (click)="logout()">
+            {{ isLoggingOut() ? 'Logging out…' : 'Logout' }}
+        </button>
+
+    </div>
+
+    } @else {
+    <p class="dashboard__loading">Not logged in</p>
+    }
+</div>

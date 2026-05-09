@@ -1,0 +1,136 @@
+<div class="login-page">
+    <div class="login-card">
+
+        <!-- Header -->
+        <div class="login-header">
+            <div class="logo-mark" aria-hidden="true">A</div>
+            <h1>Welcome back</h1>
+            <p class="subtitle">Sign in to your account to continue</p>
+        </div>
+
+        <!-- Error Banner -->
+        @if (errorMessage()) {
+        <div class="error-banner" role="alert" aria-live="polite">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                aria-hidden="true">
+                <circle cx="8" cy="8" r="7.25" stroke="currentColor"
+                    stroke-width="1.5" />
+                <path d="M8 4.5V8.5" stroke="currentColor" stroke-width="1.5"
+                    stroke-linecap="round" />
+                <circle cx="8" cy="11" r="0.75" fill="currentColor" />
+            </svg>
+            <span>{{ errorMessage() }}</span>
+        </div>
+        }
+
+        <!-- Form -->
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate
+            class="login-form">
+
+            <!-- Username -->
+            <div class="field-group"
+                [class.has-error]="username.invalid && username.touched">
+                <label for="username">Username</label>
+                <div class="input-wrapper">
+                    <svg class="input-icon" width="16" height="16"
+                        viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                        <circle cx="8" cy="5" r="3.25" stroke="currentColor"
+                            stroke-width="1.5" />
+                        <path d="M2 14c0-3.314 2.686-5 6-5s6 1.686 6 5"
+                            stroke="currentColor" stroke-width="1.5"
+                            stroke-linecap="round" />
+                    </svg>
+                    <input
+                        id="username"
+                        type="text"
+                        formControlName="username"
+                        placeholder="Enter your username"
+                        autocomplete="username"
+                        [attr.aria-invalid]="username.invalid && username.touched"
+                        aria-describedby="username-error" />
+                </div>
+                @if (username.touched && username.hasError('required')) {
+                <span id="username-error" class="field-error"
+                    role="alert">Username is required.</span>
+                } @else if (username.touched && username.hasError('minlength'))
+                {
+                <span id="username-error" class="field-error"
+                    role="alert">Username must be at least 2 characters.</span>
+                }
+            </div>
+
+            <!-- Password -->
+            <div class="field-group"
+                [class.has-error]="password.invalid && password.touched">
+                <label for="password">Password</label>
+                <div class="input-wrapper">
+                    <svg class="input-icon" width="16" height="16"
+                        viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                        <rect x="3" y="7" width="10" height="8" rx="1.5"
+                            stroke="currentColor" stroke-width="1.5" />
+                        <path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2"
+                            stroke="currentColor" stroke-width="1.5"
+                            stroke-linecap="round" />
+                    </svg>
+                    <input
+                        id="password"
+                        [type]="showPassword() ? 'text' : 'password'"
+                        formControlName="password"
+                        placeholder="Enter your password"
+                        autocomplete="current-password"
+                        [attr.aria-invalid]="password.invalid && password.touched"
+                        aria-describedby="password-error" />
+                    <button
+                        type="button"
+                        class="toggle-password"
+                        (click)="togglePassword()"
+                        [attr.aria-label]="showPassword() ? 'Hide password' : 'Show password'">
+                        @if (showPassword()) {
+                        <svg width="16" height="16" viewBox="0 0 16 16"
+                            fill="none" aria-hidden="true">
+                            <path d="M2 8s2.5-5 6-5 6 5 6 5-2.5 5-6 5-6-5-6-5z"
+                                stroke="currentColor" stroke-width="1.5" />
+                            <circle cx="8" cy="8" r="1.75" stroke="currentColor"
+                                stroke-width="1.5" />
+                            <path d="M3 3l10 10" stroke="currentColor"
+                                stroke-width="1.5" stroke-linecap="round" />
+                        </svg>
+                        } @else {
+                        <svg width="16" height="16" viewBox="0 0 16 16"
+                            fill="none" aria-hidden="true">
+                            <path d="M2 8s2.5-5 6-5 6 5 6 5-2.5 5-6 5-6-5-6-5z"
+                                stroke="currentColor" stroke-width="1.5" />
+                            <circle cx="8" cy="8" r="1.75" stroke="currentColor"
+                                stroke-width="1.5" />
+                        </svg>
+                        }
+                    </button>
+                </div>
+                @if (password.touched && password.hasError('required')) {
+                <span id="password-error" class="field-error"
+                    role="alert">Password is required.</span>
+                } @else if (password.touched && password.hasError('minlength'))
+                {
+                <span id="password-error" class="field-error"
+                    role="alert">Password must be at least 6 characters.</span>
+                }
+            </div>
+
+            <!-- Submit Button -->
+            <button
+                type="submit"
+                class="submit-btn"
+                [disabled]="isLoading()"
+                [attr.aria-busy]="isLoading()">
+                @if (isLoading()) {
+                <span class="spinner" aria-hidden="true"></span>
+                <span>Signing in…</span>
+                } @else {
+                <span>Sign in</span>
+                }
+            </button>
+
+        </form>
+
+    </div>
+</div>

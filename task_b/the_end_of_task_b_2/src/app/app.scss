@@ -1,0 +1,22 @@
+:root {
+	--brand: #1e88e5;
+}
+
+.main-nav {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 12px 20px;
+	background: var(--brand);
+	color: #fff;
+}
+
+.main-nav .links a {
+	color: #fff;
+	margin-left: 12px;
+	text-decoration: none;
+}
+
+.view {
+	padding: 24px;
+}
